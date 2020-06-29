@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const chalk = require('chalk');
 const fs = require("fs");
 const config = require('./config.json');
 
@@ -27,13 +26,6 @@ fs.readdir("./commands/", (err, files) => {
         });
     });
 });
-
-bot.on("ready", () => {
-    console.log(chalk.red(`Bot info:\n---\n`
-    + `> Users: ${bot.users.cache.size}\n`
-    + `> Channels: ${bot.channels.cache.size}\n`
-    + `> Servers: ${bot.guilds.cache.size}`));
-}); ///done
 
 bot.on("message", async message => {
     if(message.author.bot || message.channel.type === "dm") return;
