@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
+const chalk = require('chalk');
 const fs = require("fs");
-const chalk = require("chalk");
 const config = require('./config.json');
 
 const bot = new Discord.Client({disableEveryone: true});
@@ -28,12 +28,13 @@ fs.readdir("./commands/", (err, files) => {
     });
 });
 
-bot.on('ready', async () => {
-  console.log(`Bot started!\n---\n`
-  + `> Users: ${bot.users.cache.size}\n`
-  + `> Channels: ${bot.channels.cache.size}\n`
-  + `> Servers: ${bot.guilds.cache.size}`);
-}
+bot.on("ready", () => {
+    bot.user.setActivity("tutorials", {type: "LISTENING"})
+    console.log(chalk.red(`Bot info:\n---\n`
+    + `> Users: ${bot.users.cache.size}\n`
+    + `> Channels: ${bot.channels.cache.size}\n`
+    + `> Servers: ${bot.guilds.cache.size}`));
+});
 
 bot.on("message", async message => {
     if(message.author.bot || message.channel.type === "dm") return;
